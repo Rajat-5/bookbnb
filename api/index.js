@@ -23,6 +23,8 @@ app.use(cookieParser());
 app.use(express.json());
 app.use('/uploads', express.static(__dirname+'/uploads'));
 
+mongoose.connect(process.env.MONGO_URL);
+
 const corsOptions = {
     origin: 'https://bookbnb-rajat.onrender.com',
     credentials: true,
@@ -51,7 +53,6 @@ app.get('/test', (req, res) => {
 });
 
 
-mongoose.connect(process.env.MONGO_URL);
 
 app.post('/register', async (req, res) => {
     
