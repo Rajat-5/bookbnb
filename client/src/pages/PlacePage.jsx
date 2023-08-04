@@ -35,7 +35,7 @@ export default function PlacePage() {
                     </div>
                     {place?.photos?.length >0 && place.photos.map(photo => (
                         <div>
-                            <img style={{ height: '100%', width: '100%' }} src={'http://localhost:4000/uploads/'+photo} alt="" />
+                            <img style={{ height: '100%', width: '100%' }} src={'https://bookbnb-rajat.onrender.com/uploads/'+photo} alt="" />
                         </div>
                     ))}
                 </div>
