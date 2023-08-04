@@ -24,12 +24,17 @@ app.use(express.json());
 app.use('/uploads', express.static(__dirname+'/uploads'));
 
 const corsOptions = {
-    origin: 'http://localhost:5173',
+    origin: 'https://bookbnb-rajat.onrender.com',
     credentials: true,
 };
 
 app.use(cors(corsOptions));
 
+app.use(express.static(path.join(__dirname,"../client/dist")));
+
+app.get("*",(req,res)=>{
+    res.sendFile(path.resolve(__dirname,"../client/dist/index.html"));
+});
 
 function getUserDataFromReq(req) {
     return new Promise((resolve, reject) => {
