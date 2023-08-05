@@ -13,8 +13,10 @@ import PlacePage from './pages/PlacePage'
 import BookingsPage from './pages/BookingsPage'
 import BookingPage from './pages/BookingPage'
 
-axios.defaults.baseURL = 'https://bookbnb-rajat.onrender.com';
+axios.defaults.baseURL = 'https://bookbnb-rajat.onrender.com/';
 axios.defaults.withCredentials = true;
+
+// https://bookbnb-rajat.onrender.com
 
 function App() {
   

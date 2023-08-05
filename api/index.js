@@ -19,22 +19,17 @@ const jwtSecret = 'Rajatasdfghjklzxcvbnmqwertyuiop';
 
 const app=express();
 
+// app.use(cors({
+//     origin: 'http://localhost:5173',
+//     credentials: true,
+//   }));
+
 app.use(cookieParser());
 app.use(express.json());
 app.use('/uploads', express.static(__dirname+'/uploads'));
 
-const corsOptions = {
-    origin: 'https://bookbnb-rajat.onrender.com',
-    credentials: true,
-};
+mongoose.connect(process.env.MONGO_URL);
 
-app.use(cors(corsOptions));
-
-app.use(express.static(path.join(__dirname,"../client/dist")));
-
-app.get("*",(req,res)=>{
-    res.sendFile(path.resolve(__dirname,"../client/dist/index.html"));
-});
 
 function getUserDataFromReq(req) {
     return new Promise((resolve, reject) => {
@@ -51,7 +46,6 @@ app.get('/test', (req, res) => {
 });
 
 
-mongoose.connect(process.env.MONGO_URL);
 
 app.post('/register', async (req, res) => {
     
@@ -230,6 +224,12 @@ app.get('/bookings', async (req,res) => {
     mongoose.connect(process.env.MONGO_URL);
     const userData = await getUserDataFromReq(req);
     res.json( await Booking.find({user:userData.id}).populate('place') );
+});
+
+app.use(express.static(path.join(__dirname,"../client/dist")));
+
+app.get("*",(req,res)=>{
+    res.sendFile(path.resolve(__dirname,"../client/dist/index.html"));
 });
 
 app.listen(4000);
